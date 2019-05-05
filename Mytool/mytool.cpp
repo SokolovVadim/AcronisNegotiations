@@ -1,33 +1,47 @@
 #include <string>
 #include <iostream>
 
-void replace_with_star(std::string & string, const std::string & substring)
+void replace_with_star(const std::string & string, const std::string & substring)
 {
-	std::size_t length = string.length();
-	// std::cout << "length = " << length << std::endl;
-	std::size_t sub_length = substring.length();
-	std::string::size_type n = 0;
+	int length = string.length();
+	
+	int sub_length = substring.length();
+	int n = -1;
+	int prev = 0;
+	
+	std::cout << "n = " << n << std::endl;
+	
 	// std::vector<int> pos(10);
 	while(n < length)
 	{
 		// std::string cpstring(&(string.c_str()[n]));
-		// std::cout << "cpstring = " << cpstring << std::endl;
+		// std::cout << "1111" << std::endl;
 
-		n = string.find(substring);
+		n = string.find(substring, n + 1);
 		// std::cout << "n = " << n << std::endl;
-		if(n == std::string::npos)
+		if(n == int(std::string::npos))
 		{
+			for(int i(prev); i < length; ++i)
+			{
+				std::cout << string[i];
+			}
 			break;
 			// std::cout << string.substr(n) << std::endl;
 		}
-		string.replace(n, sub_length, "*");
-		
+		// string.replace(n, sub_length, "*");
+		for(int i(prev); i < n; ++i)
+		{
+			std::cout << string[i];
+		}
+		std::cout << substring;
+		std::cout << "*";
+		prev = n + sub_length;
 
 		// string = std::string(&(string.c_str()[n]));
 		
 	}
-	// std::cout << std::endl;
-	std::cout << string << std::endl;
+	std::cout << std::endl;
+	// std::cout << string << std::endl;
 }
 
 
@@ -41,39 +55,16 @@ int main(int argc, char** argv)
 	}
 
 	// std::cout << "Hello world!" << std::endl;
-	std::string str = std::string(argv[1]);
+	//std::string str = std::string(argv[1]);
 	// std::cout << str << std::endl;
 	// std::cout << "str.c_str() = " << str.c_str() << std::endl;
 
+	std::string str = std::string(argv[1]);
 	std::string 	substring = std::string(argv[2]);
-
-	/*
-	std::string::size_type n = str.find(substring);
-	std::cout << "n = " << n << std::endl;
-
-	if(n != std::string::npos)
-	{
-		std::cout << str.substr(n) << std::endl;
-	}
 
 	std::cout << "********************" << std::endl;
 
 	
-	str.replace(5, 1, "*");
-	std::cout << "replaced str = " << str << std::endl;
-
-	std::cout << "********************" << std::endl;
-
-	for(size_t i(0); i < n; i++)
-		std::cout << str[i];
-	std::cout << "*";
-	for(size_t i(n + substring.length()); i < str.length(); ++i)
-	{
-		std::cout << str[i];
-	}
-	std::cout << std::endl;
-	*/
-	std::cout << "********************" << std::endl;
 	replace_with_star(str, substring);
 }
 
